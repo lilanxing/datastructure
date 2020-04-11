@@ -1,3 +1,7 @@
+/*
+ * 参考geeksforgeeks，根据B树的度（而不是阶）来实现
+*/
+
 #ifndef B_TREE_H
 #define B_TREE_H
 
@@ -11,11 +15,11 @@ public:
     BTreeNode* search(int k);
     
 private:
-    int t;         // min degree
-    int n;         // current number of keys
-    bool leaf;     // whether node is leaf
-    int* keys;     // array of keys
-    BTreeNode** C; // array of child pointers
+    int t;         // B树的度
+    int n;         // 关键字个数
+    bool leaf;     // 是否是叶节点
+    int* keys;     // 关键字数组
+    BTreeNode** C; // 孩子节点数组
 };
 
 class BTree {
