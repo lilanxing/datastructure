@@ -4,7 +4,9 @@
 BTreeNode::BTreeNode(int _t, bool _leaf) {
     t = _t;
     leaf = _leaf;
+    // 根据度定义，最多2t-1个关键字
     keys = new int[2 * t - 1];
+    // 根据度定义，最多2t个孩子节点
     C = new BTreeNode*[2 * t];
     n = 0;
 }
@@ -13,15 +15,17 @@ void BTreeNode::traverse() {
     int i;
     for (i = 0; i < n; ++i) {
 	if (!leaf) C[i]->traverse();
-	std::cout << " " << keys[i];
+        // n个关键字
+	std::cout << keys[i] << " ";
     }
+    // n + 1个孩子
     if (!leaf) C[i]->traverse();
 }
 
 BTreeNode* BTreeNode::search(int k) {
     int i = 0;
     while (i < n && k > keys[i]) ++i;
-    if (keys[i] == k) return this;
+    if (i < n && keys[i] == k) return this;
     if (leaf) return NULL;
     return C[i]->search(k);
 }
